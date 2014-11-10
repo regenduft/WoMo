@@ -9,6 +9,9 @@ import java.util.*;
  * not the key-count. The methods "get" and "remove" return the first entry for the key only. 
  * To get all entries for a key use "getList".
  * This implementation is optimized for 1 to 3 entries per key.
+ *
+ * XXX: TODO: implement own equals() and hashCode() functions
+ *
  * @author Florian Jostock
  *
  */
