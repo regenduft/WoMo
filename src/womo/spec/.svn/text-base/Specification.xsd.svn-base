@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="Operator">
+  	<xs:restriction base="xs:string">
+		<xs:enumeration value="eq" />
+		<xs:enumeration value="neq" />
+		<xs:enumeration value="gt" />
+		<xs:enumeration value="lt" />
+		<xs:enumeration value="geq" />
+		<xs:enumeration value="leq" />
+	</xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RecordType">
+  	<xs:restriction base="xs:string">
+		<xs:enumeration value="formular" />
+		<xs:enumeration value="time" />
+		<xs:enumeration value="counter" />
+	</xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ActionType">
+  	<xs:restriction base="xs:string">
+  		<xs:enumeration value="finish" />
+  		<xs:enumeration value="redo" />
+  		<xs:enumeration value="activity" />
+  		<xs:enumeration value="togglePlink"></xs:enumeration>
+  	</xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Position">
+  	<xs:restriction base="xs:string">
+		<xs:enumeration value="pre" />
+		<xs:enumeration value="post" />
+		<xs:enumeration value="onFailure" />
+	</xs:restriction>
+  </xs:simpleType>
+  
+    <xs:complexType name="Requirement">
+      <xs:sequence>
+        <xs:element type="xs:string" name="activityName" />
+        <xs:element type="Position" name="position" />
+        <xs:element type="xs:boolean" name="sendStatus" />
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Record">
+      <xs:sequence>
+        <xs:element type="xs:string" name="formular" />
+        <xs:element type="RecordType" name="type" />
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Action">
+      <xs:sequence>
+        <xs:element type="xs:string" name="activity" />
+        <xs:element type="ActionType" name="type" />
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="Assurance">
+  		<xs:complexContent>
+			<xs:extension base="Requirement">
+		     	<xs:sequence>
+			        <xs:element type="Record" name="leftRecord" />
+    	    		<xs:element type="Operator" name="operator" />
+			        <xs:element type="Record" name="rightRecord" />
+        			<xs:element type="Action" name="actions" maxOccurs="unbounded" minOccurs="0"/>
+		     	</xs:sequence>			
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+  
+  	<xs:complexType name="Log">
+  		<xs:complexContent>
+			<xs:extension base="Requirement">
+	    	 	<xs:sequence>
+		        	<xs:element type="Record" name="record" />
+	     		</xs:sequence>			
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+
+  	<xs:complexType name="OnFailure">
+  		<xs:complexContent>
+			<xs:extension base="Requirement">
+	    	 	<xs:sequence>
+		        	<xs:element type="Record" name="record" />
+        			<xs:element type="Action" name="actions" maxOccurs="unbounded" minOccurs="0"/>
+	     		</xs:sequence>			
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+  
+    <xs:complexType name="SvcAddress">
+      <xs:sequence>
+        <xs:element type="xs:string" name="ns" />
+        <xs:element type="xs:string" name="name" />
+        <xs:element type="xs:string" name="url" />
+        <xs:element type="xs:string" name="port" />
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Binding">
+      <xs:sequence>
+        <xs:element type="xs:string" name="plink" />
+        <xs:element type="xs:string" name="dependentPlinks" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element type="SvcAddress" name="addresses" minOccurs="1" maxOccurs="unbounded" />
+        <xs:element type="xs:string" name="defaultNs" />
+        <xs:element type="xs:string" name="defaultName" />
+        <xs:element type="xs:string" name="defaultPort" />
+      </xs:sequence>
+    </xs:complexType>
+
+  <xs:element name="Specification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="Requirement" name="requirements" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element type="Binding" name="bindings" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+
+</xs:schema>

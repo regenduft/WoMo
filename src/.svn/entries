@@ -1,0 +1,56 @@
+8
+
+dir
+364
+svn://trip261.wohnheim.uni-kl.de/Mofa/WoMo/src
+svn://trip261.wohnheim.uni-kl.de/Mofa
+
+
+
+2007-08-17T09:26:23.306771Z
+364
+flo
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+5e46a434-701e-0410-b53f-dfcdc273dcc5
+
+.DeployBPRService.wsdl.swp
+file
+
+
+
+
+2007-06-13T15:00:59.000000Z
+a95413f3947f6f7943e9cfc8753d5e4c
+2007-06-13T15:00:59.165298Z
+277
+flo
+has-props
+
+DeployBPRService.wsdl
+file
+
+
+
+
+2007-06-13T15:00:59.000000Z
+6bd59b21beaa291728fe0180507e60a5
+2007-06-13T15:00:59.165298Z
+277
+flo
+
+womo
+dir
+
